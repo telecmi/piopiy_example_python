@@ -1,0 +1,21 @@
+from flask import Flask,request
+app = Flask(__name__)
+
+
+# Receive webhooks from PIOPIY platform when call receive or make
+@app.route("/webhook/cdr",methods=['POST'])
+def hello():
+    # Received JSON CDR from PIOPIY Platform
+    cdr = request.get_json()
+    print(cdr)
+
+    print(cdr['type'])
+    print(cdr['time'])
+    print(cdr['direction'])
+    return "got it"
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
+
